@@ -1,18 +1,11 @@
 streamlit==1.41.1
-
-# Core numeric stack
 numpy==1.26.4
 pillow==10.4.0
 
-# Headless OpenCV (NO libGL needed)
-opencv-python-headless==4.10.0.84
+opencv-python==4.11.0.86
 
-# Torch (CPU wheels are fine on Streamlit Cloud)
 torch==2.2.2
 torchvision==0.17.2
-
-# Ultralytics pinned to a stable version
 ultralytics==8.2.103
 
-# SAM
 git+https://github.com/facebookresearch/segment-anything.git
