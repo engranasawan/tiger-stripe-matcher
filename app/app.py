@@ -48,7 +48,12 @@ except Exception as e:
 st.markdown(
     """
 <style>
-.block-container { padding-top: 1.35rem; padding-bottom: 2rem; max-width: 1200px; }
+.block-container {
+  padding-top: 4.5rem;   /* FIX: pushes content below Streamlit header */
+  padding-bottom: 2.5rem;
+  max-width: 1200px;
+}
+
 hr { border: none; height: 1px; background: rgba(255,255,255,0.10); margin: 14px 0 16px; }
 .big-title { font-size: 2.35rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.08; }
 .subtle { opacity: 0.86; font-size: 1.02rem; margin-top: 0.25rem; }
