@@ -107,7 +107,7 @@ def ensure_sam_checkpoint() -> None:
 @st.cache_resource
 def load_models() -> ModelBundle:
     ensure_sam_checkpoint()
-    return ModelBundle(sam_ckpt_path=SAM_PATH)
+    return ModelBundle(sam_ckpt_path=SAM_PATH, sam_arch=SAM_ARCH)
 
 # ============================
 # Helpers
