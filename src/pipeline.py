@@ -22,18 +22,16 @@ def _cv2():
 
 
 class ModelBundle:
-    def __init__(self, sam_ckpt_path: str = "sam_vit_h_4b8939.pth"):
+    def __init__(self, sam_ckpt_path: str, sam_arch: str = "vit_b"):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.yolo = YOLO("yolov8m.pt")
+        self.yolo = YOLO("yolov8n.pt")  # also lighter than yolov8m
 
         if not os.path.exists(sam_ckpt_path):
-            raise FileNotFoundError(
-                f"SAM checkpoint not found: {sam_ckpt_path}\n"
-                "Place it in the project root or enable auto-download in app.py"
-            )
+            raise FileNotFoundError(f"SAM checkpoint not found: {sam_ckpt_path}")
 
-        sam = sam_model_registry["vit_h"](checkpoint=sam_ckpt_path).to(self.device).eval()
+        sam = sam_model_registry[sam_arch](checkpoint=sam_ckpt_path).to(self.device).eval()
         self.sam_predictor = SamPredictor(sam)
+
 
 
 def _largest_cc(mask_u8):
