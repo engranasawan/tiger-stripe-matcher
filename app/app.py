@@ -3,7 +3,9 @@ import numpy as np
 import streamlit as st
 from PIL import Image
 import cv2
-
+import os
+import urllib.request
+import streamlit as st
 from src.pipeline import ModelBundle, compare_tiger_stripes
 
 # ----------------------------
@@ -62,9 +64,7 @@ def draw_bbox(img_rgb, bbox_xyxy):
     return out
 
 @st.cache_resource
-import os
-import urllib.request
-import streamlit as st
+
 
 SAM_URL = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth"
 SAM_PATH = "sam_vit_h_4b8939.pth"
