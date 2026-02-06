@@ -2,12 +2,26 @@
 import os
 import urllib.request
 
-import cv2
 import numpy as np
 import streamlit as st
+def safe_import_cv2():
+    try:
+        import cv2
+        return cv2
+    except Exception as e:
+        st.error(
+            "❌ OpenCV failed to load.\n\n"
+            "This usually means:\n"
+            "- Python version not pinned to 3.11\n"
+            "- opencv-python-headless not installed\n\n"
+            f"Error: {e}"
+        )
+        st.stop()
+
 from PIL import Image
 
 from src.pipeline import ModelBundle, compare_tiger_stripes
+
 
 # ============================
 # Page config
@@ -122,10 +136,12 @@ def overlay_mask(img_rgb: np.ndarray, mask: np.ndarray, alpha: float = 0.45) -> 
 
 
 def draw_bbox(img_rgb: np.ndarray, bbox_xyxy: np.ndarray) -> np.ndarray:
+    cv2 = safe_import_cv2()
     x1, y1, x2, y2 = [int(v) for v in bbox_xyxy]
     out = img_rgb.copy()
     cv2.rectangle(out, (x1, y1), (x2, y2), (255, 220, 80), 3)
     return out
+
 
 
 def clamp_2d(img2d: np.ndarray) -> np.ndarray:
