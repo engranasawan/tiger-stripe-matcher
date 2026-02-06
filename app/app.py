@@ -93,8 +93,9 @@ img { border-radius: 14px; }
 # ============================
 # SAM checkpoint auto-download
 # ============================
-SAM_URL = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth"
-SAM_PATH = "sam_vit_h_4b8939.pth"
+SAM_URL = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth"
+SAM_PATH = "sam_vit_b_01ec64.pth"
+SAM_ARCH = "vit_b"
 
 def ensure_sam_checkpoint() -> None:
     if os.path.exists(SAM_PATH):
