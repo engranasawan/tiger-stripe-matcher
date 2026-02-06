@@ -62,9 +62,24 @@ def draw_bbox(img_rgb, bbox_xyxy):
     return out
 
 @st.cache_resource
+import os
+import urllib.request
+import streamlit as st
+
+SAM_URL = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth"
+SAM_PATH = "sam_vit_h_4b8939.pth"
+
+def ensure_sam_checkpoint():
+    if os.path.exists(SAM_PATH):
+        return
+    with st.spinner("Downloading SAM model (first run only)…"):
+        urllib.request.urlretrieve(SAM_URL, SAM_PATH)
+
+@st.cache_resource
 def load_models():
-    # Put sam_vit_h_4b8939.pth in project root
-    return ModelBundle(sam_ckpt_path="sam_vit_h_4b8939.pth")
+    ensure_sam_checkpoint()
+    return ModelBundle(sam_ckpt_path=SAM_PATH)
+
 
 # ----------------------------
 # Header
